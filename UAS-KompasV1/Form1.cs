@@ -24,9 +24,53 @@ namespace UAS_KompasV1
             InitializeComponent();
         }
 
+        private void processObtainedText(String processedText)
+        {
+            string wordPattern = @"^[a-zA-Z]+$";
+            string unnecessaryCharacterPattern = @"[""\',.:;()*%!?#$\-/]";
+
+            // Step 1, remove unnecessary character.
+            processedText = new Regex(unnecessaryCharacterPattern).Replace(processedText, " ");
+
+            // Step 2, filter word only.
+            String[] splitText = processedText.Split(' ').Where(text => new Regex(wordPattern).IsMatch(text.Trim())).ToArray();
+            List<string> lowercaseText = new List<string>();
+            foreach (String text in splitText)
+            {
+                String word = text.ToLower();
+                lowercaseText.Add(word);
+
+                if (!frequencyTable.ContainsKey(word))
+                {
+                    frequencyTable.Add(word, 1);
+                }
+                else
+                {
+                    frequencyTable[word] = frequencyTable[word] + 1;
+                }
+            }
+
+        
+            processedText = String.Join(" ", lowercaseText);
+
+            textBox.AppendText(processedText);
+        }
+
+        private void renderGridView()
+        {
+            dataGridView.Rows.Clear();
+
+            List<string> words = new List<string>(frequencyTable.Keys);
+            foreach (string word in words)
+            {
+                String[] row = { word, frequencyTable[word].ToString() };
+                dataGridView.Rows.Add(row);
+            }
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            webBrowser.Navigate("https://www.google.com/search?q=site%3Akompas.com+" + txtQuery.Text); 
+            webBrowser.Navigate("https://www.google.com/search?q=site%3Akompas.com+" + txtQuery.Text + "&source=lnt&tbs=qdr:m&sa=X&ved=0ahUKEwjptY7n983YAhVCfbwKHXfaDZkQpwUIHw&biw=1366&bih=662"); 
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -48,14 +92,7 @@ namespace UAS_KompasV1
                 frequencyTable.Remove(stopWord);
             }
 
-            dataGridView.Rows.Clear();
-
-            List<string> words = new List<string>(frequencyTable.Keys);
-            foreach (string word in words)
-            {
-                String[] row = { word, frequencyTable[word].ToString() };
-                dataGridView.Rows.Add(row);
-            }
+            renderGridView();
         }
 
         private void webBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
@@ -114,42 +151,9 @@ namespace UAS_KompasV1
                     // Remove unnecessary characters.
                     String processedText = paragraph.InnerText;
 
-                    string wordPattern = @"^[a-zA-Z]+$";
-                    string unnecessaryCharacterPattern = @"[""\',.:;()*%!?#$\-/]";
+                    processObtainedText(processedText);
+                    renderGridView();
 
-                    // Step 1, remove unnecessary character.
-                    processedText = new Regex(unnecessaryCharacterPattern).Replace(processedText, " ");
-
-                    // Step 2, filter word only.
-                    String[] splitText = processedText.Split(' ').Where(text => new Regex(wordPattern).IsMatch(text.Trim())).ToArray();
-                    List<string> lowercaseText = new List<string>();
-                    foreach (String text in splitText)
-                    {
-                        String word = text.ToLower();
-                        lowercaseText.Add(word);
-
-                        if (!frequencyTable.ContainsKey(word))
-                        {
-                            frequencyTable.Add(word, 1);
-                        }
-                        else
-                        {
-                            frequencyTable[word] = frequencyTable[word] + 1;
-                        }
-                    }
-
-                    dataGridView.Rows.Clear();
-
-                    List<string> words = new List<string>(frequencyTable.Keys);
-                    foreach (string word in words)
-                    {
-                        String[] row = { word, frequencyTable[word].ToString() };
-                        dataGridView.Rows.Add(row);
-                    }
-
-                    processedText = String.Join(" ", lowercaseText);
-
-                    textBox.AppendText(processedText);
                 }
             }
 
