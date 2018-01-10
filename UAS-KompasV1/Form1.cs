@@ -8,10 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using System.Net;
+using System.IO;
+
 namespace UAS_KompasV1
 {
     public partial class Form1 : Form
     {
+        public int currentActiveItemIndex = 0;
+
         public Form1()
         {
             InitializeComponent();
@@ -48,9 +53,37 @@ namespace UAS_KompasV1
                             linkNews.Items.Add(url);
                         }
                     }
+
+                    timer1.Enabled = true;
                 }
                 
                 
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            linkNews.SelectedIndex = currentActiveItemIndex;
+            String url = linkNews.SelectedItem.ToString();
+
+            WebClient client = new WebClient();
+
+            client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+
+            Stream data = client.OpenRead(url);
+            StreamReader reader = new StreamReader(data);
+            string s = reader.ReadToEnd();
+            data.Close();
+            reader.Close();
+
+            textBox.AppendText(s);
+            currentActiveItemIndex++;
+
+            if (currentActiveItemIndex == linkNews.Items.Count)
+            {
+                timer1.Enabled = false;
+
+                MessageBox.Show("Finish!");
             }
         }
     }

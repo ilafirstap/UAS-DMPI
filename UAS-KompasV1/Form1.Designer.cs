@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtQuery = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.textBox = new System.Windows.Forms.TextBox();
@@ -35,6 +36,7 @@
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.btnDeleteStopWords = new System.Windows.Forms.Button();
             this.linkNews = new System.Windows.Forms.ListBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,6 +59,7 @@
             // 
             // textBox
             // 
+            this.textBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox.Location = new System.Drawing.Point(12, 230);
             this.textBox.Multiline = true;
             this.textBox.Name = "textBox";
@@ -65,6 +68,7 @@
             // 
             // webBrowser
             // 
+            this.webBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.webBrowser.Location = new System.Drawing.Point(336, 12);
             this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser.Name = "webBrowser";
@@ -74,6 +78,9 @@
             // 
             // dataGridView
             // 
+            this.dataGridView.AccessibleRole = System.Windows.Forms.AccessibleRole.Alert;
+            this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Location = new System.Drawing.Point(657, 12);
             this.dataGridView.Name = "dataGridView";
@@ -82,7 +89,7 @@
             // 
             // btnDeleteStopWords
             // 
-            this.btnDeleteStopWords.Location = new System.Drawing.Point(201, 12);
+            this.btnDeleteStopWords.Location = new System.Drawing.Point(199, 9);
             this.btnDeleteStopWords.Name = "btnDeleteStopWords";
             this.btnDeleteStopWords.Size = new System.Drawing.Size(118, 23);
             this.btnDeleteStopWords.TabIndex = 6;
@@ -98,6 +105,11 @@
             this.linkNews.Size = new System.Drawing.Size(307, 173);
             this.linkNews.TabIndex = 7;
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 3000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -110,6 +122,7 @@
             this.Controls.Add(this.textBox);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtQuery);
+            this.MinimumSize = new System.Drawing.Size(910, 429);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
@@ -127,6 +140,7 @@
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Button btnDeleteStopWords;
         private System.Windows.Forms.ListBox linkNews;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
