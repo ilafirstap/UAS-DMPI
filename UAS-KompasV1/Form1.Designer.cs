@@ -37,6 +37,8 @@
             this.btnDeleteStopWords = new System.Windows.Forms.Button();
             this.linkNews = new System.Windows.Forms.ListBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.word = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -82,6 +84,9 @@
             this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.word,
+            this.amount});
             this.dataGridView.Location = new System.Drawing.Point(657, 12);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(240, 366);
@@ -109,6 +114,16 @@
             // 
             this.timer1.Interval = 3000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // word
+            // 
+            this.word.HeaderText = "Kata";
+            this.word.Name = "word";
+            // 
+            // amount
+            // 
+            this.amount.HeaderText = "Jumlah";
+            this.amount.Name = "amount";
             // 
             // Form1
             // 
@@ -141,6 +156,8 @@
         private System.Windows.Forms.Button btnDeleteStopWords;
         private System.Windows.Forms.ListBox linkNews;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn word;
+        private System.Windows.Forms.DataGridViewTextBoxColumn amount;
     }
 }
 

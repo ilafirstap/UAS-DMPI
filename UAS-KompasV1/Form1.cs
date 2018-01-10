@@ -31,7 +31,31 @@ namespace UAS_KompasV1
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            WebClient client = new WebClient();
 
+            client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+
+            String url = "https://raw.githubusercontent.com/masdevid/ID-Stopwords/master/id.stopwords.02.01.2016.txt";
+            Stream data = client.OpenRead(url);
+            StreamReader reader = new StreamReader(data);
+            string pageSource = reader.ReadToEnd();
+            data.Close();
+            reader.Close();
+
+            String[] stopWords = pageSource.Split('\n');
+            foreach (String stopWord in stopWords)
+            {
+                frequencyTable.Remove(stopWord);
+            }
+
+            dataGridView.Rows.Clear();
+
+            List<string> words = new List<string>(frequencyTable.Keys);
+            foreach (string word in words)
+            {
+                String[] row = { word, frequencyTable[word].ToString() };
+                dataGridView.Rows.Add(row);
+            }
         }
 
         private void webBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
@@ -58,8 +82,6 @@ namespace UAS_KompasV1
 
                     timer1.Enabled = true;
                 }
-                
-                
             }
         }
 
@@ -112,11 +134,18 @@ namespace UAS_KompasV1
                         }
                         else
                         {
-                            frequencyTable[word] = frequencyTable[word]++;
+                            frequencyTable[word] = frequencyTable[word] + 1;
                         }
                     }
 
+                    dataGridView.Rows.Clear();
 
+                    List<string> words = new List<string>(frequencyTable.Keys);
+                    foreach (string word in words)
+                    {
+                        String[] row = { word, frequencyTable[word].ToString() };
+                        dataGridView.Rows.Add(row);
+                    }
 
                     processedText = String.Join(" ", lowercaseText);
 
