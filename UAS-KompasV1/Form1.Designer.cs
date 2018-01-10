@@ -70,6 +70,7 @@
             this.webBrowser.Name = "webBrowser";
             this.webBrowser.Size = new System.Drawing.Size(298, 368);
             this.webBrowser.TabIndex = 4;
+            this.webBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser_DocumentCompleted);
             // 
             // dataGridView
             // 

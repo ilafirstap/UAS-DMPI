@@ -1,0 +1,10 @@
+D:\REPOSITORIES\UAS-KompasV1\UAS-KompasV1\bin\Debug\UAS-KompasV1.exe.config
+D:\REPOSITORIES\UAS-KompasV1\UAS-KompasV1\bin\Debug\UAS-KompasV1.exe
+D:\REPOSITORIES\UAS-KompasV1\UAS-KompasV1\bin\Debug\UAS-KompasV1.pdb
+D:\REPOSITORIES\UAS-KompasV1\UAS-KompasV1\obj\Debug\UAS-KompasV1.csprojResolveAssemblyReference.cache
+D:\REPOSITORIES\UAS-KompasV1\UAS-KompasV1\obj\Debug\UAS_KompasV1.Form1.resources
+D:\REPOSITORIES\UAS-KompasV1\UAS-KompasV1\obj\Debug\UAS_KompasV1.Properties.Resources.resources
+D:\REPOSITORIES\UAS-KompasV1\UAS-KompasV1\obj\Debug\UAS-KompasV1.csproj.GenerateResource.Cache
+D:\REPOSITORIES\UAS-KompasV1\UAS-KompasV1\obj\Debug\UAS-KompasV1.csproj.CoreCompileInputs.cache
+D:\REPOSITORIES\UAS-KompasV1\UAS-KompasV1\obj\Debug\UAS-KompasV1.exe
+D:\REPOSITORIES\UAS-KompasV1\UAS-KompasV1\obj\Debug\UAS-KompasV1.pdb
