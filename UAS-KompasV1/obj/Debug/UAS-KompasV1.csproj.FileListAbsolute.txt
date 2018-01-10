@@ -8,3 +8,6 @@ D:\REPOSITORIES\UAS-KompasV1\UAS-KompasV1\obj\Debug\UAS-KompasV1.csproj.Generate
 D:\REPOSITORIES\UAS-KompasV1\UAS-KompasV1\obj\Debug\UAS-KompasV1.csproj.CoreCompileInputs.cache
 D:\REPOSITORIES\UAS-KompasV1\UAS-KompasV1\obj\Debug\UAS-KompasV1.exe
 D:\REPOSITORIES\UAS-KompasV1\UAS-KompasV1\obj\Debug\UAS-KompasV1.pdb
+D:\REPOSITORIES\UAS-KompasV1\UAS-KompasV1\bin\Debug\HtmlAgilityPack.dll
+D:\REPOSITORIES\UAS-KompasV1\UAS-KompasV1\bin\Debug\HtmlAgilityPack.pdb
+D:\REPOSITORIES\UAS-KompasV1\UAS-KompasV1\bin\Debug\HtmlAgilityPack.xml

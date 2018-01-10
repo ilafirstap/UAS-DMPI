@@ -10,12 +10,14 @@ using System.Windows.Forms;
 
 using System.Net;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace UAS_KompasV1
 {
     public partial class Form1 : Form
     {
         public int currentActiveItemIndex = 0;
+        public Dictionary<string, int> frequencyTable = new Dictionary<string, int>();
 
         public Form1()
         {
@@ -72,11 +74,56 @@ namespace UAS_KompasV1
 
             Stream data = client.OpenRead(url);
             StreamReader reader = new StreamReader(data);
-            string s = reader.ReadToEnd();
+            string pageSource = reader.ReadToEnd();
             data.Close();
             reader.Close();
 
-            textBox.AppendText(s);
+            HtmlAgilityPack.HtmlDocument document = new HtmlAgilityPack.HtmlDocument();
+            document.LoadHtml(pageSource);
+
+            HtmlAgilityPack.HtmlNodeCollection contents = document.DocumentNode.SelectNodes("//div[contains(@class, 'read__content')]");
+            if (contents.Count > 0)
+            {
+                HtmlAgilityPack.HtmlNode content = contents[0];
+                HtmlAgilityPack.HtmlNodeCollection paragraphs = content.SelectNodes("//p");
+
+                foreach (HtmlAgilityPack.HtmlNode paragraph in paragraphs)
+                {
+                    // Remove unnecessary characters.
+                    String processedText = paragraph.InnerText;
+
+                    string wordPattern = @"^[a-zA-Z]+$";
+                    string unnecessaryCharacterPattern = @"[""\',.:;()*%!?#$\-/]";
+
+                    // Step 1, remove unnecessary character.
+                    processedText = new Regex(unnecessaryCharacterPattern).Replace(processedText, " ");
+
+                    // Step 2, filter word only.
+                    String[] splitText = processedText.Split(' ').Where(text => new Regex(wordPattern).IsMatch(text.Trim())).ToArray();
+                    List<string> lowercaseText = new List<string>();
+                    foreach (String text in splitText)
+                    {
+                        String word = text.ToLower();
+                        lowercaseText.Add(word);
+
+                        if (!frequencyTable.ContainsKey(word))
+                        {
+                            frequencyTable.Add(word, 1);
+                        }
+                        else
+                        {
+                            frequencyTable[word] = frequencyTable[word]++;
+                        }
+                    }
+
+
+
+                    processedText = String.Join(" ", lowercaseText);
+
+                    textBox.AppendText(processedText);
+                }
+            }
+
             currentActiveItemIndex++;
 
             if (currentActiveItemIndex == linkNews.Items.Count)
